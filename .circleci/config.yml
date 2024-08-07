@@ -6,7 +6,7 @@ orbs:
 jobs:
   build:
     executor:
-      name: circleci/android:2024.08.01
+      name: android/android
     steps:
       - checkout
       - restore_cache:
