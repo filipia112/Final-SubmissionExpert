@@ -22,13 +22,11 @@ jobs:
             unzip commandlinetools.zip -d $HOME/android-sdk/cmdline-tools || { echo "Failed to unzip command line tools"; exit 1; }
             mv $HOME/android-sdk/cmdline-tools/cmdline-tools $HOME/android-sdk/cmdline-tools/latest || { echo "Failed to move command line tools"; exit 1; }
       - run:
-          name: Accept Android SDK Licenses
+          name: Install SDK Components and Accept Licenses
           command: |
-            yes | $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager --licenses || { echo "Failed to accept licenses"; exit 1; }
-      - run:
-          name: Install SDK Components
-          command: |
-            $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-30" "build-tools;34.0.0" || { echo "Failed to install SDK components"; exit 1; }
+            $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager --update || { echo "Failed to update SDK manager"; exit 1; }
+            echo y | $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-30" "build-tools;34.0.0" || { echo "Failed to install SDK components"; exit 1; }
+            echo y | $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager --licenses || { echo "Failed to accept licenses"; exit 1; }
       - run:
           name: Set Environment Variables
           command: |
