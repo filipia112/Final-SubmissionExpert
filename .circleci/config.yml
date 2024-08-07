@@ -8,8 +8,6 @@ jobs:
     executor: android/android
     steps:
       - checkout
-      - restore_cache:
-          key: android-orb-v1-
       - run:
           name: Install Java 17
           command: |
