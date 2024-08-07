@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/valo_black">
+    <ImageView
+        android:id="@+id/IvbackgroundTextName"
+        android:layout_width="wrap_content"
+        android:layout_height="550dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/gekko"
+        android:layout_gravity="center"/>
+    <ImageView
+        android:id="@+id/IvagentsImage"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/omen_image"
+        android:transitionName="sharedImageTransition"
+        android:layout_gravity="center"/>
+    <TextView
+        android:id="@+id/tvNameAgents"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="100dp"
+        android:text="@string/omen"
+        android:textSize="54sp"
+        android:fontFamily="@font/monomaniacone_regular"
+        android:textColor="@color/valo_red"/>
+</FrameLayout>

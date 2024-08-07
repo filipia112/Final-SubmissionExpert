@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="valo_red">#FF4655</color>
+    <color name="valo_light_red">#FE6A76</color>
+    <color name="valo_white">#FFFFFFFF</color>
+    <color name="valo_black">#0F1923</color>
+    <color name="valo_gray">#2C2F34</color>
+    <color name="valo_light_gray">#EBECF0</color>
+    <color name="valo_yellow">#F9E204</color>
+    <color name="valo_blue">#3F8EEB</color>
+</resources>

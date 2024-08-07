@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">ProjectSubmissionAndroidExpert</string>
+    <string name="learn_the_agents">LEARN THE AGENTS</string>
+    <string name="valorant_agent">Valorant Agent</string>
+    <string name="omen">Omen</string>
+    <string name="no_data">Empty data</string>
+    <string name="something_wrong">Oops.. something went wrong</string>
+    <string name="exampl_desc">Gekko the Angeleno leads a tight-knit crew of calamitous creatures. His buddies bound forward, scattering enemies out of the way, with Gekko chasing them down to regroup and go again.</string>
+    <string name="name_example">Gekko</string>
+    <string name="search_now">Search Now..</string>
+    <string name="see_more_about_playgame_use_a_character">See more about playgame use a Character</string>
+    <string name="click_here_for_see_more">Click Here for see more</string>
+    <string name="favorite_list">Favorite List</string>
+    <string name="title_core">module core</string>
+    <string name="title_favorite">favorite module</string>
+    <string name="module_title">Favorite</string>
+</resources>
