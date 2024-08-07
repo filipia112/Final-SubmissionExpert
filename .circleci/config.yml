@@ -3,30 +3,30 @@ version: 2.1
 executors:
   java-executor:
     docker:
-      - image: circleci/openjdk:17-jdk
-    working_directory: ~/repo
+      - image: cimg/openjdk:17  # Docker image dengan OpenJDK 17
+    working_directory: ~/repo  # Direktori kerja untuk job
 
 jobs:
   build:
-    executor: java-executor
+    executor: java-executor  # Executor yang digunakan untuk job ini
     steps:
-      - checkout
+      - checkout  # Mengambil kode sumber dari repositori
       - run:
-          name: Install Gradle 8.6
+          name: Install Gradle 8.6  # Langkah untuk menginstal Gradle
           command: |
-            wget https://services.gradle.org/distributions/gradle-8.6-bin.zip
-            unzip gradle-8.6-bin.zip
-            sudo mv gradle-8.6 /opt/gradle
-            sudo ln -s /opt/gradle/bin/gradle /usr/bin/gradle
+            wget https://services.gradle.org/distributions/gradle-8.6-bin.zip  # Mengunduh Gradle
+            unzip gradle-8.6-bin.zip  # Menyimpan file zip
+            sudo mv gradle-8.6 /opt/gradle  # Memindahkan Gradle ke direktori
+            sudo ln -s /opt/gradle/bin/gradle /usr/bin/gradle  # Membuat symlink untuk Gradle
       - run:
-          name: Gradle Build
-          command: gradle build
+          name: Gradle Build  # Langkah untuk membangun proyek
+          command: gradle build  # Perintah untuk membangun proyek
       - run:
-          name: Gradle Test
-          command: gradle test
+          name: Gradle Test  # Langkah untuk menjalankan tes
+          command: gradle test  # Perintah untuk menjalankan tes
 
 workflows:
   version: 2
   build_and_test:
     jobs:
-      - build
+      - build  # Menjalankan job build dalam workflow ini
