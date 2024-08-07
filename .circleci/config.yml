@@ -3,7 +3,7 @@ version: 2.1
 executors:
   java-executor:
     docker:
-      image: cimg/openjdk:17.0.2
+      - image: cimg/openjdk:17  # Pastikan image ini ada dan tersedia
     working_directory: ~/repo  # Direktori kerja untuk job
 
 jobs:
@@ -14,10 +14,10 @@ jobs:
       - run:
           name: Install Gradle 8.6  # Langkah untuk menginstal Gradle
           command: |
-            wget https://services.gradle.org/distributions/gradle-8.6-bin.zip  # Mengunduh Gradle
-            unzip gradle-8.6-bin.zip  # Menyimpan file zip
-            sudo mv gradle-8.6 /opt/gradle  # Memindahkan Gradle ke direktori
-            sudo ln -s /opt/gradle/bin/gradle /usr/bin/gradle  # Membuat symlink untuk Gradle
+            wget https://services.gradle.org/distributions/gradle-8.6-bin.zip
+            unzip gradle-8.6-bin.zip
+            sudo mv gradle-8.6 /opt/gradle
+            sudo ln -s /opt/gradle/bin/gradle /usr/bin/gradle
       - run:
           name: Gradle Build  # Langkah untuk membangun proyek
           command: gradle build  # Perintah untuk membangun proyek
