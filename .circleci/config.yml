@@ -6,7 +6,7 @@ orbs:
 executors:
   android-executor:
     docker:
-      - image: android/android
+      - image: circleci/android:api-34-alpha
     working_directory: ~/project
 
 jobs:
@@ -24,14 +24,11 @@ jobs:
             sudo update-alternatives --config java
             sudo update-alternatives --config javac
             java -version
-      - run:
-          name: Set JAVA_HOME
-          command: echo "export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" >> $BASH_ENV
+      - restore_cache:
+          key: android-orb-v1-{{ checksum "app/build.gradle" }}-{{ checksum "settings.gradle" }}
       - run:
           name: Chmod permissions
           command: sudo chmod +x ./gradlew
-      - restore_cache:
-          key: android-orb-v1-{{ checksum "app/build.gradle" }}-{{ checksum "settings.gradle" }}
       - run:
           name: Download Dependencies
           command: ./gradlew dependencies --no-daemon
