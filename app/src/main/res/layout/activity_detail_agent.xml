@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Omen"
-            android:textColor="@color/valo_red"
+            android:textColor="@color/valo_white"
             android:fontFamily="@font/monomaniacone_regular"
             android:textSize="32sp"/>
     </LinearLayout>

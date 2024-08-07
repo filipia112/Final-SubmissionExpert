@@ -1,4 +1,4 @@
-package com.example.projectsubmissionandroidexpert
+package com.example.projectsubmissionandroidexpert.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData

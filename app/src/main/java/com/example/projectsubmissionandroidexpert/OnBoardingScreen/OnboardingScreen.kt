@@ -1,12 +1,9 @@
-package com.example.projectsubmissionandroidexpert.presentation.ui
+package com.example.projectsubmissionandroidexpert.OnBoardingScreen
 
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.projectsubmissionandroidexpert.R
 import com.example.projectsubmissionandroidexpert.databinding.ActivityOnboardingScreenBinding
 import com.example.projectsubmissionandroidexpert.main.MainActivity
 

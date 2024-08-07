@@ -9,16 +9,13 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.core.data.source.Resource
 import com.example.core.core.ui.AgentAdapter
 import com.example.projectsubmissionandroidexpert.detail.DetailAgentActivity
-import com.example.projectsubmissionandroidexpert.ListAgentViewModel
 import com.example.projectsubmissionandroidexpert.R
-import com.example.projectsubmissionandroidexpert.SearchViewModel
 import com.example.projectsubmissionandroidexpert.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
@@ -26,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private val searchViewModel: SearchViewModel by viewModels ()
     private val listAgentsViewModel: ListAgentViewModel by viewModels ()
     private lateinit var binding: ActivityMainBinding
+    private lateinit var broadcastReceiver: BroadcastReceiver
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
@@ -42,6 +40,7 @@ class MainActivity : AppCompatActivity() {
             )
             startActivity(intent, options.toBundle())
         }
+        registerBroadCastReceiver()
         listAgentsViewModel.agent.observe(this) { agent ->
             if (agent != null) {
                 when (agent) {
@@ -84,14 +83,42 @@ class MainActivity : AppCompatActivity() {
             adapter = agentsAdapter
         }
         binding.btnNavigateFavorite.setOnClickListener{
-            ActivityFavorite()
+            activityfavorite()
         }
     }
-    private fun ActivityFavorite() {
+    private fun activityfavorite() {
         val uri = Uri.parse("projectsubmissionandroidexpert://favorite")
         val intent = Intent(Intent.ACTION_VIEW, uri)
         startActivity(intent)
     }
+    private fun registerBroadCastReceiver() {
+        broadcastReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                when (intent.action) {
+                    Intent.ACTION_POWER_CONNECTED -> {
+                        binding.tvPowerStatus.text = getString(R.string.power_connected)
+                    }
+                    Intent.ACTION_POWER_DISCONNECTED -> {
+                        binding.tvPowerStatus.text = getString(R.string.power_disconnected)
+                    }
+                }
+            }
+        }
+        val intentFilter = IntentFilter().apply {
+            addAction(Intent.ACTION_POWER_CONNECTED)
+            addAction(Intent.ACTION_POWER_DISCONNECTED)
+        }
+        registerReceiver(broadcastReceiver, intentFilter)
+    }
 
+    override fun onStart() {
+        super.onStart()
+        registerBroadCastReceiver()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(broadcastReceiver)
+    }
 
 }

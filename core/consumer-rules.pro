@@ -87,6 +87,11 @@
 -keep class com.bumptech.glide.load.data.ParcelFileDescriptorRewinder$InternalRewinder {
     *** rewind();
 }
+##---------------Begin: ProGuard configuration for Room ----------
+# Room uses reflection and annotations, so you need to keep these classes
+-keep class androidx.room.** { *; }
+-keepclassmembers class androidx.room.** { *; }
+-dontwarn androidx.room.**
 
 ##---------------Begin: ProGuard configuration for Dagger-Hilt ----------
 # Keep Hilt-related classes

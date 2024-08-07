@@ -48,8 +48,8 @@ class AgentsRepository @Inject constructor(
         }
     }
 
-    override fun setFavoriteAgent(agent: Agent, state: Boolean) {
-        val agentEntity = DataMapper.mapDomainToEntity(agent)
+    override fun setFavoriteAgent(agents: Agent, state: Boolean) {
+        val agentEntity = DataMapper.mapDomainToEntity(agents)
         agentEntity.isFavorite = state
         CoroutineScope(Dispatchers.IO).launch {
             localDataSource.setFavoriteAgent(agentEntity.uuid, state)

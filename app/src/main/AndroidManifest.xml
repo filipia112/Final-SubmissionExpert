@@ -22,7 +22,7 @@
             android:name=".main.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.ui.OnboardingScreen"
+            android:name=".OnBoardingScreen.OnboardingScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

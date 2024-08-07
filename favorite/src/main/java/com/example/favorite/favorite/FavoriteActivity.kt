@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.airbnb.lottie.LottieAnimationView
 import com.example.core.core.ui.AgentOnlyFavoriteAdapter
 import com.example.projectsubmissionandroidexpert.databinding.ActivityFavoriteBinding
 import com.example.projectsubmissionandroidexpert.detail.DetailAgentActivity
@@ -22,10 +23,12 @@ class FavoriteActivity : AppCompatActivity() {
     private val favoriteViewModel: FavoriteViewModel by viewModels  {
         factory
     }
+    private lateinit var lottieAnimationView: LottieAnimationView
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityFavoriteBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        lottieAnimationView = binding.lottieAnimationView
         val favoriteComponent = DaggerFavoriteComponent.builder()
             .context(this)
             .appDependencies(
@@ -46,8 +49,13 @@ class FavoriteActivity : AppCompatActivity() {
         lifecycleScope.launch {
             favoriteViewModel.getFavorite.collect { dataAgent ->
                 adapterFavorite.setData(dataAgent)
-                binding.viewEmpty.root.visibility =
-                    if (dataAgent.isNotEmpty()) View.GONE else View.VISIBLE
+                if (dataAgent.isEmpty()) {
+                    lottieAnimationView.visibility = View.VISIBLE
+                    lottieAnimationView.playAnimation()
+                } else {
+                    lottieAnimationView.visibility = View.GONE
+                    lottieAnimationView.pauseAnimation()
+                }
             }
         }
         with(binding.rvListAgentss) {

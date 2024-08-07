@@ -1,4 +1,4 @@
-package com.example.projectsubmissionandroidexpert
+package com.example.projectsubmissionandroidexpert.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +9,6 @@ import com.example.core.core.domain.model.Agent
 import com.example.core.core.domain.usecase.AgentUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -33,7 +32,7 @@ class SearchViewModel @Inject constructor(private val agentsUseCase: AgentUseCas
                             _agents.value = emptyList()
                         }
                         is Resource.Loading -> {
-                            // Optionally handle loading state
+                            _agents.value = resource.data
                         }
                     }
                 }
@@ -53,7 +52,6 @@ class SearchViewModel @Inject constructor(private val agentsUseCase: AgentUseCas
             agents
         } else {
             agents.filter { it.displayName.contains(query, ignoreCase = true) }
-            agents.filter { it.developerName.contains(query,ignoreCase = true)}
         }
     }
 
