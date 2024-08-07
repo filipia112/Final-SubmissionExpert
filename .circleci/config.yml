@@ -7,9 +7,9 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Update Package List and Install OpenJDK 11
+          name: Update Package List and Install OpenJDK 17
           command: |
-            sudo apt-get update && sudo apt-get install -y openjdk-11-jdk
+            sudo apt-get update && sudo apt-get install -y openjdk-17-jdk
       - run:
           name: Set JAVA_HOME
           command: |
