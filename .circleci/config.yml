@@ -50,7 +50,7 @@ jobs:
           name: Archive APK
           command: |
             mkdir -p $HOME/artifacts
-            cp app/build/outputs/apk/release/app-release.apk $HOME/artifacts/ || { echo "Failed to copy APK"; exit 1; }
+            cp app/release/app-release.apk $HOME/artifacts/ || { echo "Failed to copy APK"; exit 1; }
       - store_artifacts:
           path: $HOME/artifacts
           destination: artifacts
