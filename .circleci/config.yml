@@ -21,10 +21,7 @@ jobs:
             wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip -O commandlinetools.zip || { echo "Failed to download command line tools"; exit 1; }
             unzip commandlinetools.zip -d $HOME/android-sdk/cmdline-tools || { echo "Failed to unzip command line tools"; exit 1; }
             mv $HOME/android-sdk/cmdline-tools/cmdline-tools $HOME/android-sdk/cmdline-tools/latest || { echo "Failed to move command line tools"; exit 1; }
-      - run:
-          name: Install SDK Components and Accept Licenses
-          command: |
-            $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager --update || { echo "Failed to update SDK manager"; exit 1; }
+            echo y | $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager --update || { echo "Failed to update SDK manager"; exit 1; }
             echo y | $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-30" "build-tools;34.0.0" || { echo "Failed to install SDK components"; exit 1; }
             echo y | $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager --licenses || { echo "Failed to accept licenses"; exit 1; }
       - run:
@@ -42,15 +39,18 @@ jobs:
           command: echo "sdk.dir=$ANDROID_HOME" > local.properties
       - run:
           name: Build APK
-          command: ./gradlew assembleRelease --info || { echo "Build failed"; exit 1; }
+          command: ./gradlew assembleRelease || { echo "Build failed"; exit 1; }
       - run:
           name: Run Tests
           command: ./gradlew test || { echo "Tests failed"; exit 1; }
       - run:
+          name: List Build Outputs
+          command: ls -R app/build/outputs/apk/ || { echo "Failed to list build outputs"; exit 1; }
+      - run:
           name: Archive APK
           command: |
             mkdir -p $HOME/artifacts
-            cp app/build/outputs/apk/release/app-release.apk $HOME/artifacts/
+            cp app/build/outputs/apk/release/app-release.apk $HOME/artifacts/ || { echo "Failed to copy APK"; exit 1; }
       - store_artifacts:
           path: $HOME/artifacts
           destination: artifacts
