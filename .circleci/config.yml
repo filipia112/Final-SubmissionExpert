@@ -15,6 +15,11 @@ jobs:
             sudo update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java
             sudo update-alternatives --set javac /usr/lib/jvm/java-17-openjdk-amd64/bin/javac
             java -version
+            echo "export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" >> $BASH_ENV
+            echo "export PATH=$JAVA_HOME/bin:$PATH" >> $BASH_ENV
+      - run:
+          name: Apply JAVA_HOME and PATH
+          command: source $BASH_ENV
       - restore_cache:
           key: android-orb-v1-
       - run:
