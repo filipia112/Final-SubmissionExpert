@@ -21,7 +21,7 @@ jobs:
             wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip -O commandlinetools.zip || { echo "Failed to download command line tools"; exit 1; }
             unzip commandlinetools.zip -d $HOME/android-sdk/cmdline-tools || { echo "Failed to unzip command line tools"; exit 1; }
             mv $HOME/android-sdk/cmdline-tools/cmdline-tools $HOME/android-sdk/cmdline-tools/latest || { echo "Failed to move command line tools"; exit 1; }
-            yes | $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager --licenses || { echo "Failed to accept licenses"; exit 1; }
+            echo y | $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager --licenses || { echo "Failed to accept licenses"; exit 1; }
             $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-30" || { echo "Failed to install SDK components"; exit 1; }
       - run:
           name: Set Environment Variables
