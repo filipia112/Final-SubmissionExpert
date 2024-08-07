@@ -12,10 +12,8 @@ jobs:
             java -version
             javac -version
       - run:
-          name: Install Dependencies
+          name: Install Gradle
           command: |
-            sudo apt-get update
-            sudo apt-get install -y wget unzip
             wget https://services.gradle.org/distributions/gradle-7.6-bin.zip
             unzip gradle-7.6-bin.zip
             sudo mv gradle-7.6 /usr/local/gradle
