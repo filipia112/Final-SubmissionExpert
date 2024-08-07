@@ -32,11 +32,19 @@ jobs:
           name: Create local.properties
           command: echo "sdk.dir=$ANDROID_HOME" > local.properties
       - run:
-          name: Build Project
-          command: ./gradlew build
+          name: Build APK
+          command: ./gradlew assembleRelease
       - run:
           name: Run Tests
           command: ./gradlew test
+      - run:
+          name: Archive APK
+          command: |
+            mkdir -p $HOME/artifacts
+            cp app/build/outputs/apk/release/app-release.apk $HOME/artifacts/
+      - store_artifacts:
+          path: $HOME/artifacts
+          destination: artifacts
 
 workflows:
   version: 2
