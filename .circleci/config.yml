@@ -3,7 +3,7 @@ version: 2.1
 executors:
   java-executor:
     docker:
-      - image: cimg/openjdk:17  # Docker image dengan OpenJDK 17
+      image: cimg/openjdk:17.0.2
     working_directory: ~/repo  # Direktori kerja untuk job
 
 jobs:
