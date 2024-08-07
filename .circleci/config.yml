@@ -9,15 +9,15 @@ jobs:
       - run:
           name: Update Package List and Install OpenJDK 17
           command: |
-            sudo apt-get update && sudo apt-get install -y openjdk-17-jdk
+            sudo apt-get update && sudo apt-get install -y openjdk-17-jdk wget unzip
       - run:
           name: Install Android SDK
           command: |
-            mkdir -p $HOME/android-sdk
+            mkdir -p $HOME/android-sdk/cmdline-tools/latest
             wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip -O commandlinetools.zip
-            unzip commandlinetools.zip -d $HOME/android-sdk
-            yes | $HOME/android-sdk/cmdline-tools/bin/sdkmanager --licenses
-            $HOME/android-sdk/cmdline-tools/bin/sdkmanager "platform-tools" "platforms;android-30"  # Atur versi platform sesuai kebutuhan proyek
+            unzip commandlinetools.zip -d $HOME/android-sdk/cmdline-tools/latest
+            yes | $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager --licenses
+            $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-30"  # Atur versi platform sesuai kebutuhan proyek
       - run:
           name: Set Environment Variables
           command: |
