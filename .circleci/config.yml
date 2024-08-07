@@ -1,38 +1,32 @@
 version: 2.1
 
-jobs:
-  build_and_test:
+executors:
+  java-executor:
     docker:
-      - image: cimg/openjdk:17-jdk-slim
+      - image: circleci/openjdk:17-jdk
+    working_directory: ~/repo
+
+jobs:
+  build:
+    executor: java-executor
     steps:
       - checkout
       - run:
-          name: Verify Java Version
+          name: Install Gradle 8.6
           command: |
-            java -version
-            javac -version
+            wget https://services.gradle.org/distributions/gradle-8.6-bin.zip
+            unzip gradle-8.6-bin.zip
+            sudo mv gradle-8.6 /opt/gradle
+            sudo ln -s /opt/gradle/bin/gradle /usr/bin/gradle
       - run:
-          name: Install Gradle
-          command: |
-            wget https://services.gradle.org/distributions/gradle-7.6-bin.zip
-            unzip gradle-7.6-bin.zip
-            sudo mv gradle-7.6 /usr/local/gradle
-            sudo ln -s /usr/local/gradle/bin/gradle /usr/bin/gradle
-            gradle -v
+          name: Gradle Build
+          command: gradle build
       - run:
-          name: Build
-          command: ./gradlew build
-      - run:
-          name: Test
-          command: ./gradlew test
-      - store_artifacts:
-          path: app/build/reports
-          destination: reports
-      - store_test_results:
-          path: app/build/test-results
+          name: Gradle Test
+          command: gradle test
 
 workflows:
   version: 2
   build_and_test:
     jobs:
-      - build_and_test
+      - build
