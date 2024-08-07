@@ -6,7 +6,7 @@ orbs:
 executors:
   android-executor:
     docker:
-      - image: circleci/android:api-34-alpha
+      - image: android/android
     working_directory: ~/project
 
 jobs:
