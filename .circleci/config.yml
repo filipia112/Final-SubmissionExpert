@@ -21,8 +21,8 @@ jobs:
             wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip -O commandlinetools.zip || { echo "Failed to download command line tools"; exit 1; }
             unzip commandlinetools.zip -d $HOME/android-sdk/cmdline-tools || { echo "Failed to unzip command line tools"; exit 1; }
             mv $HOME/android-sdk/cmdline-tools/cmdline-tools $HOME/android-sdk/cmdline-tools/latest || { echo "Failed to move command line tools"; exit 1; }
-            echo y | $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager --licenses || { echo "Failed to accept licenses"; exit 1; }
-            $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3" || { echo "Failed to install SDK components"; exit 1; }
+            yes | $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager --licenses || { echo "Failed to accept licenses"; exit 1; }
+            $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-30" "build-tools;34.0.0" || { echo "Failed to install SDK components"; exit 1; }
       - run:
           name: Set Environment Variables
           command: |
@@ -31,27 +31,13 @@ jobs:
             echo "export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$PATH" >> $BASH_ENV
             source $BASH_ENV
       - run:
-          name: Cache Gradle
-          command: |
-            mkdir -p ~/.gradle/caches
-            mkdir -p ~/.gradle/wrapper
-      - restore_cache:
-          keys:
-            - gradle-cache-v1-{{ checksum "build.gradle" }}
-            - gradle-cache-v1-
-      - save_cache:
-          paths:
-            - ~/.gradle/caches
-            - ~/.gradle/wrapper
-          key: gradle-cache-v1-{{ checksum "build.gradle" }}
-      - run:
           name: Make Gradlew Executable
           command: chmod +x ./gradlew
       - run:
           name: Create local.properties
           command: echo "sdk.dir=$ANDROID_HOME" > local.properties
       - run:
-          name: Build APK with Debug
+          name: Build APK
           command: ./gradlew assembleRelease --info || { echo "Build failed"; exit 1; }
       - run:
           name: Run Tests
