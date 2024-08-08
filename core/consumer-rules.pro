@@ -24,13 +24,6 @@
 -keep class * implements com.google.gson.JsonSerializer
 -keep class * implements com.google.gson.JsonDeserializer
 
-# Prevent ProGuard from stripping interface information from TypeAdapter, TypeAdapterFactory,
-# JsonSerializer, JsonDeserializer instances (so they can be used in @JsonAdapter)
--keep class * extends com.google.gson.TypeAdapter
--keep class * implements com.google.gson.TypeAdapterFactory
--keep class * implements com.google.gson.JsonSerializer
--keep class * implements com.google.gson.JsonDeserializer
-
 # Keep annotations used in Dagger and Hilt
 -keep class javax.inject.** { *; }
 -keep class dagger.hilt.internal.** { *; }
@@ -41,35 +34,39 @@
 -keepclassmembers,allowobfuscation class * {
     @com.google.gson.annotations.SerializedName <fields>;
 }
-##---------------Begin: proguard configuration for Retrofit ----------
-# Retrofit does reflection on generic parameters. InnerClasses is required to use Signature and
-# EnclosingMethod is required to use InnerClasses.
+# Keep Retrofit and OkHttp classes
+-keep class retrofit2.Retrofit { *; }
+-keep class retrofit2.Call { *; }
+-keep class retrofit2.CallAdapter { *; }
+-keep class retrofit2.** { *; }
+-keep class okhttp3.** { *; }
 
+# Keep Gson and Moshi converter classes
+-keep class com.google.gson.** { *; }
+-keep class retrofit2.converter.gson.** { *; }
+-keep class com.squareup.moshi.** { *; }
+-keep class retrofit2.converter.moshi.** { *; }
+
+# Keep annotations and methods used by Retrofit
 -keepattributes Signature, InnerClasses, EnclosingMethod
-
-# Retrofit does reflection on method and parameter annotations.
 -keepattributes RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations
 
-# Retain service method parameters when optimizing.
+# Retain service method parameters
 -keepclassmembers,allowshrinking,allowobfuscation interface * {
    @retrofit2.http.* <methods>;
 }
 
-# Ignore JSR 305 annotations for embedding nullability information.
+# Ignore warnings for JSR 305 annotations and Kotlin extensions
 -dontwarn javax.annotation.**
-
-# Guarded by a NoClassDefFoundError try/catch and only used when on the classpath.
--dontwarn kotlin.Unit
-
-# Top-level functions that can only be used by Kotlin.
 -dontwarn retrofit2.KotlinExtensions
 -dontwarn retrofit2.KotlinExtensions*
+-dontwarn kotlin.Unit
+-dontwarn kotlinx.**
 
-# With R8 full mode, it sees no subtypes of Retrofit interfaces since they are created with a Proxy
-# and replaces all potential values with null. Explicitly keeping the interfaces prevents this.
+# Ensure Retrofit interfaces are preserved
 -if interface * { @retrofit2.http.* <methods>; }
 -keep,allowobfuscation interface <1>
--dontwarn kotlinx.**
+
 ##---------------Begin: ProGuard configuration for Glide ----------
 # Keep Glide modules and their initialization methods
 -keep public class * implements com.bumptech.glide.module.GlideModule
@@ -138,14 +135,9 @@
 
 # Keep the DI modules and generated classes
 -keep class com.example.core.core.di.DatabaseModule { *; }
--keep class com.example.core.core.di.DatabaseModule_ProvideAgentDaoFactory { *; }
--keep class com.example.core.core.di.DatabaseModule_ProvideDatabaseFactory { *; }
 -keep class com.example.core.core.di.NetworkModule { *; }
--keep class com.example.core.core.di.NetworkModule_ProvideApiServiceFactory { *; }
--keep class com.example.core.core.di.NetworkModule_ProvideOkHttpClientFactory { *; }
 -keep class com.example.core.core.di.RepositoryModule { *; }
 -keep class com.example.core.core.di.UseCaseModule { *; }
--keep class com.example.core.core.di.UseCaseModule_ProvideAgentUseCaseFactory { *; }
 
 # Keep the domain model and use cases
 -keep class com.example.core.core.domain.model.Agent { *; }
@@ -160,8 +152,3 @@
 # Keep utility classes
 -keep class com.example.core.core.utils.AppExecutors { *; }
 
-# Keep Hilt generated dependencies
--keep class hilt_aggregated_deps._com_example_core_core_di_DatabaseModule { *; }
--keep class hilt_aggregated_deps._com_example_core_core_di_NetworkModule { *; }
--keep class hilt_aggregated_deps._com_example_core_core_di_RepositoryModule { *; }
--keep class hilt_aggregated_deps._com_example_core_core_di_UseCaseModule { *; }
