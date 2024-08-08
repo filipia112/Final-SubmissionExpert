@@ -1,7 +1,6 @@
 package com.example.projectsubmissionandroidexpert.main
 
 import android.app.ActivityOptions
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
@@ -23,7 +22,6 @@ class MainActivity : AppCompatActivity() {
     private val searchViewModel: SearchViewModel by viewModels ()
     private val listAgentsViewModel: ListAgentViewModel by viewModels ()
     private lateinit var binding: ActivityMainBinding
-    private lateinit var broadcastReceiver: BroadcastReceiver
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
@@ -40,7 +38,6 @@ class MainActivity : AppCompatActivity() {
             )
             startActivity(intent, options.toBundle())
         }
-        registerBroadCastReceiver()
         listAgentsViewModel.agent.observe(this) { agent ->
             if (agent != null) {
                 when (agent) {
@@ -91,33 +88,5 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(Intent.ACTION_VIEW, uri)
         startActivity(intent)
     }
-    private fun registerBroadCastReceiver() {
-        broadcastReceiver = object : BroadcastReceiver() {
-            override fun onReceive(context: Context, intent: Intent) {
-                when (intent.action) {
-                    Intent.ACTION_POWER_CONNECTED -> {
-                        binding.tvPowerStatus.text = getString(R.string.power_connected)
-                    }
-                    Intent.ACTION_POWER_DISCONNECTED -> {
-                        binding.tvPowerStatus.text = getString(R.string.power_disconnected)
-                    }
-                }
-            }
-        }
-        val intentFilter = IntentFilter().apply {
-            addAction(Intent.ACTION_POWER_CONNECTED)
-            addAction(Intent.ACTION_POWER_DISCONNECTED)
-        }
-        registerReceiver(broadcastReceiver, intentFilter)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        registerBroadCastReceiver()
-    }
-
-   override fun onStop() {
-        super.onStop()
-        unregisterReceiver(broadcastReceiver)
-    }
+    
 }
