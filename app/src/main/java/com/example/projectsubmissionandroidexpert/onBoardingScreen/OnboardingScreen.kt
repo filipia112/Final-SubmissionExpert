@@ -1,4 +1,4 @@
-package com.example.projectsubmissionandroidexpert.OnBoardingScreen
+package com.example.projectsubmissionandroidexpert.onBoardingScreen
 
 import android.content.Context
 import android.content.Intent
@@ -13,7 +13,7 @@ class OnboardingScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityOnboardingScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.btnLearniAgents.setOnClickListener {
+        binding.btnLearningAgents.setOnClickListener {
             navigateMainActivity(this)
         }
     }

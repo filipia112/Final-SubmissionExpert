@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.widget.ImageView
@@ -25,8 +26,13 @@ class DetailAgentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailAgentBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val detailAgent: Agent? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra(EXTRA_DATA, Agent::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            intent.getParcelableExtra(EXTRA_DATA) as? Agent
+        }
 
-        val detailAgent = intent.getParcelableExtra<Agent>(EXTRA_DATA)
         detailAgent?.let {
             showDetailAgent(it)
         }

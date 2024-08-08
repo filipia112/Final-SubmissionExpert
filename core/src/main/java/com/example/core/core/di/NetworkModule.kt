@@ -18,6 +18,10 @@ class NetworkModule {
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
         val hostname = "valorant-api.com"
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+
         val certificatePinner = CertificatePinner.Builder()
             .add(hostname, "sha256/epgaKMiJXsMHixIQpvW/4UfzmNhaLqhgZeW8gB6REug=")
             .add(hostname, "sha256/kIdp6NNEd8wsugYyyIYFsi1ylMCED3hZbSR8ZFsa/A4=")
@@ -25,7 +29,7 @@ class NetworkModule {
             .build()
 
         return OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            .addInterceptor(loggingInterceptor)
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
             .certificatePinner(certificatePinner)

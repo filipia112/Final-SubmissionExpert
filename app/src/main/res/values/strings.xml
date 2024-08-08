@@ -5,7 +5,6 @@
     <string name="omen">Omen</string>
     <string name="no_data">Empty data</string>
     <string name="something_wrong">Oops.. something went wrong</string>
-    <string name="exampl_desc">Gekko the Angeleno leads a tight-knit crew of calamitous creatures. His buddies bound forward, scattering enemies out of the way, with Gekko chasing them down to regroup and go again.</string>
     <string name="name_example">Gekko</string>
     <string name="search_now">Search Now..</string>
     <string name="see_more_about_playgame_use_a_character">See more about playgame use a Character</string>
@@ -18,4 +17,19 @@
     <string name="title_core">module core</string>
     <string name="title_favorite">favorite module</string>
     <string name="module_title">Favorite</string>
+    <string name="no_agents_found">No agents found</string>
+    <string name="descriptionlogo">descriptionLogo</string>
+    <string name="background_gradient">background_gradient</string>
+    <string name="button_back">button_back</string>
+    <string name="example_displayname">Omen</string>
+    <string name="ivbackgrounddisplayname">IvBackgroundDisplayName</string>
+    <string name="ivagentsimage">IvAgentsImage</string>
+    <string name="deskripsi_tentang_karakter">Deskripsi tentang karakter</string>
+    <string name="vectorred">vectorRed</string>
+    <string name="iso_image">iso_image</string>
+    <string name="image_text_valorant">image_text_valorant</string>
+    <string name="border_line">border line</string>
+    <string name="vectorgray">vectorgray</string>
+    <string name="small_logo_valorant">small logo valorant</string>
+    <string name="button_navigate_favorite">button_navigate_favorite</string>
 </resources>

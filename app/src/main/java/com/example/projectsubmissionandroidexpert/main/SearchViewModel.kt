@@ -36,6 +36,7 @@ class SearchViewModel @Inject constructor(private val agentsUseCase: AgentUseCas
                         }
                     }
                 }
+
         }
 
         viewModelScope.launch {

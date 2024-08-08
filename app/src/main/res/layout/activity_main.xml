@@ -16,7 +16,7 @@
         android:id="@+id/noResultsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No agents found"
+        android:text="@string/no_agents_found"
         android:visibility="gone"/>
 
     <ProgressBar
@@ -51,6 +51,7 @@
             android:layout_width="55dp"
             android:layout_height="50dp"
             android:layout_marginTop="24dp"
+             android:contentDescription="@string/descriptionlogo"
             android:src="@drawable/logo_valo"
             android:layout_marginStart="16dp"
             android:layout_gravity="start"/>
@@ -63,10 +64,11 @@
             android:textSize="24sp"
             android:layout_marginTop="32dp"
             android:layout_marginStart="86dp"/>
-        <Button
+        <ImageButton
             android:id="@+id/btnNavigateFavorite"
-            android:layout_width="42dp"
-            android:layout_height="40dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="@string/button_navigate_favorite"
             android:padding="8dp"
             android:layout_gravity="end"
             android:layout_marginTop="28dp"
@@ -74,10 +76,10 @@
             android:background="@drawable/favorite_primary"/>
         <SearchView
             android:id="@+id/searchViewAgents"
-            android:layout_width="match_parent"
+            android:layout_width="380dp"
             android:layout_height="58dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginStart="15dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginStart="25dp"
             android:iconifiedByDefault="false"
             android:layout_gravity="top|center"
             android:background="@drawable/background_search"

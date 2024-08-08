@@ -106,7 +106,9 @@
 -keep class * implements dagger.Module
 -keep class * implements dagger.Provides
 -keep class * implements dagger.Binds
-
+# For certificate pinning
+-keep class okhttp3.CertificatePinner { *; }
+-dontwarn okhttp3.CertificatePinner
 ##---------------Begin: ProGuard configuration for Kotlin Coroutines and Flow ----------
 # Keep Kotlin Coroutines and Flow classes
 -keep class kotlinx.coroutines.** { *; }
