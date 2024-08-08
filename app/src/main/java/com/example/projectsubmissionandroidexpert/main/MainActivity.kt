@@ -1,9 +1,7 @@
 package com.example.projectsubmissionandroidexpert.main
 
 import android.app.ActivityOptions
-import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
