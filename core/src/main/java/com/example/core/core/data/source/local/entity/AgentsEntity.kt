@@ -8,7 +8,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "agents")
 data class AgentsEntity(
     @PrimaryKey
-    @NonNull
     @ColumnInfo(name = "uuid")
     var uuid: String,
 
