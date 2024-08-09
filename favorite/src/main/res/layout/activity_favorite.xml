@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieAnimationView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        app:lottie_rawRes="@raw/anim_empty"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="false" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_ListAgentss"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="80dp"
+        tools:listitem="@layout/item_list_favorite_agent" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/valo_black"
+        android:layout_gravity="top|center">
+        <ImageView
+            android:layout_width="55dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:contentDescription="@string/descriptionlogo"
+            android:src="@drawable/logo_valo"
+            android:layout_marginStart="16dp"
+            android:layout_gravity="start"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/favorite_list"
+            android:textColor="@color/valo_red"
+            android:fontFamily="@font/monomaniacone_regular"
+            android:textSize="24sp"
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="86dp"/>
+    </FrameLayout>
+</FrameLayout>

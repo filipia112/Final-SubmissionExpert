@@ -8,6 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="550dp"
         android:layout_marginTop="20dp"
+        android:contentDescription="@string/ivbackgroundtextname"
         android:src="@drawable/gekko"
         android:layout_gravity="center"/>
     <ImageView
@@ -15,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_marginTop="40dp"
+        android:contentDescription="@string/ivimaegagents"
         android:src="@drawable/omen_image"
         android:transitionName="sharedImageTransition"
         android:layout_gravity="center"/>

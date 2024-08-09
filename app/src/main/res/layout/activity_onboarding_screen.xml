@@ -2,10 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/valo_black"
     tools:context=".onBoardingScreen.OnboardingScreen">
     <ImageView
         android:layout_width="90dp"
@@ -23,14 +21,12 @@
         android:background="@drawable/logo_valo"
         android:contentDescription="@string/small_logo_valorant" />
     <ImageView
-        android:id="@+id/textIdiso"
         android:layout_width="wrap_content"
         android:layout_height="600dp"
         android:background="@drawable/iso_image_a"
         android:layout_gravity="bottom"
         android:contentDescription="@string/iso_image" />
     <ImageView
-        android:id="@+id/textIdValorant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"

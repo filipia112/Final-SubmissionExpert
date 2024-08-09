@@ -9,7 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.lottie.LottieAnimationView
 import com.example.core.core.ui.AgentOnlyFavoriteAdapter
-import com.example.projectsubmissionandroidexpert.databinding.ActivityFavoriteBinding
+import com.example.favorite.databinding.ActivityFavoriteBinding
 import com.example.projectsubmissionandroidexpert.detail.DetailAgentActivity
 import com.example.projectsubmissionandroidexpert.di.FavoriteModuleDependencies
 import dagger.hilt.android.EntryPointAccessors
